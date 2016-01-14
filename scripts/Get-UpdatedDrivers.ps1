@@ -31,8 +31,8 @@ Begin
     # Decalre Variables
     $FolderName = (Get-WmiObject Win32_computersystem).model
     $DriverDir = Join-Path -path $PSScriptRoot -ChildPath $FolderName
-    $DriverInfoFile = Join-Path -Path $DriverDir -ChildPath 'DriverInfo.txt'
     $UpdatedDir = Join-Path -Path $DriverDir -ChildPath 'UpdatedDrivers'
+    $DriverInfoFile = Join-Path -Path $UpdatedDir -ChildPath 'DriverInfo.txt'
 }
 Process
 {
@@ -66,7 +66,7 @@ Process
         }
 
         # Export Windows Drivers
-        Export-WindowsDriver -Online -Destination $DriverDir -LogPath "$DriverDir\ExportLog.txt"
+        Export-WindowsDriver -Online -Destination $DriverDir -LogPath "$UpdatedDir\ExportLog.txt"
 
         # Copy Updated Driver to Updated Driver Folder
         foreach ($DriverName in $DriverList)
@@ -74,6 +74,9 @@ Process
             $DriverFolder = Join-Path -Path $DriverDir -ChildPath $DriverName
             Copy-Item -Path $DriverFolder -Destination $UpdatedDir -Container -Recurse -Force
         }
+
+        # Remove Unused Drivers if needed
+        if ($DeleteNonUpdated.IsPresent) { Get-ChildItem -Path $DriverDir -Exclude 'UpdatedDrivers' | Remove-Item -Force -Recurse }
     }
     catch
     {
