@@ -16,7 +16,7 @@
     number from the PC vendor, Windows Update was still updating the driver. If I used the exact driver Windows Update was
     pushing it finally supressed the update.
 .LINK 
-
+    https://github.com/gerane/PowerShell/blob/master/scripts/Get-UpdatedDrivers.ps1
 #>
 [CmdletBinding()]
 Param (
