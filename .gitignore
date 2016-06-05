@@ -1,0 +1,26 @@
+# Syncthing
+~syncthing~*.tmp
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+._*
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+
+# Folder config file
+Desktop.ini
+picasa.ini
+
+# Office Temp Files
+~$*
+
